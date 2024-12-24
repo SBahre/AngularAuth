@@ -32,4 +32,21 @@ router.post("/register", (req, res) => {
     });
 });
 
+router.post("/login", (req, res) => {
+  let userData = req.body;
+  User.findOne({ email: userData.email })
+    .then((userFound) => {
+      if (!userFound) {
+        res.status(401).send("Invalid Email");
+      } else if (userFound.password !== userData.password) {
+        res.status(401).send("Invalid Password");
+      } else {
+        res.status(200).send(userFound);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
 module.exports = router;
