@@ -7,6 +7,10 @@ import { LoginComponent } from './login/login.component';
 import { EventsComponent } from './events/events.component';
 import { RegisterComponent } from './register/register.component';
 import { SpecialEventsComponent } from './special-events/special-events.component';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { AuthService } from './services/auth.service';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,9 +22,11 @@ import { SpecialEventsComponent } from './special-events/special-events.componen
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+     CommonModule,
   ],
-  providers: [],
+  providers: [AuthService,provideHttpClient()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
