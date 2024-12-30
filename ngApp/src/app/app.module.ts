@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './services/auth.service';
 import { provideHttpClient } from '@angular/common/http';
+import { EventService } from './event.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { provideHttpClient } from '@angular/common/http';
     FormsModule,
      CommonModule,
   ],
-  providers: [AuthService,provideHttpClient()],
+  providers: [AuthService,EventService,provideHttpClient()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
