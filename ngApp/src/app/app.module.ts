@@ -19,15 +19,10 @@ import { EventService } from './event.service';
     LoginComponent,
     EventsComponent,
     RegisterComponent,
-    SpecialEventsComponent
+    SpecialEventsComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-     CommonModule,
-  ],
-  providers: [AuthService,EventService,provideHttpClient()],
-  bootstrap: [AppComponent]
+  imports: [BrowserModule, AppRoutingModule, FormsModule, CommonModule],
+  providers: [AuthService, EventService, provideHttpClient()],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

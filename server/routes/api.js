@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
+
 const db =
   "mongodb+srv://<some_user>>:<password>@<cluster_name>.7ktse.mongodb.net/";
 
@@ -25,7 +27,9 @@ router.post("/register", (req, res) => {
   user
     .save()
     .then((registeredUser) => {
-      res.status(200).send(registeredUser);
+      let payload = { subject: registeredUser._id };
+      let token = jwt.sign(payload, "secretKey");
+      res.status(200).send({ token });
     })
     .catch((error) => {
       console.log(error);
@@ -41,7 +45,9 @@ router.post("/login", (req, res) => {
       } else if (userFound.password !== userData.password) {
         res.status(401).send("Invalid Password");
       } else {
-        res.status(200).send(userFound);
+        let payload = { subject: userFound._id };
+        let token = jwt.sign(payload, "secretKey");
+        res.status(200).send({ token });
       }
     })
     .catch((error) => {

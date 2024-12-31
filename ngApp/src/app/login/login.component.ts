@@ -5,36 +5,26 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   standalone: false,
-  
+
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit {
+  loginUserData = { email: '', password: '' };
 
-  loginUserData = {email: '', password: ''}
+  constructor(private _auth: AuthService, private _router: Router) {}
 
-  constructor(private _auth: AuthService,
-              private _router: Router) { }
+  ngOnInit() {}
 
-  ngOnInit() {
-  }
-
-  async loginUser () {
+  async loginUser() {
     console.log(this.loginUserData);
     try {
-    let result = await  this._auth.loginUser(this.loginUserData)
-    console.log(result)
+      let result = await this._auth.loginUser(this.loginUserData);
+      console.log(result);
+      localStorage.setItem('token', result.token);
+      this._router.navigate(['/special']);
     } catch (error) {
-    console.log(error)
-      
+      console.log(error);
     }
-    // .subscribe(
-    //   res => {
-    //     localStorage.setItem('token', res.token)
-    //     this._router.navigate(['/special'])
-    //   },
-    //   err => console.log(err)
-    // ) 
   }
-
 }

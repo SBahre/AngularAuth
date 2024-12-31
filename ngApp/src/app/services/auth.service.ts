@@ -20,4 +20,13 @@ export class AuthService {
     let result= this.http.post<any>(this.loginUrl, user);
     return lastValueFrom(result);
   }
+
+
+  getToken() {
+    return localStorage.getItem('token')
+  }
+
+  loggedIn() {
+    return !!localStorage.getItem('token')    
+  }
 }
