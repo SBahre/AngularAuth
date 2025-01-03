@@ -16,6 +16,23 @@ mongoose
     console.log("Error! " + err);
   });
 
+//https://www.youtube.com/watch?v=ajmB9mYAD3k&list=PLC3y8-rFHvwg2RBz6UplKTGIXREj9dV0G&index=26
+function verifyToken(req, res, next) {
+  if (!req.headers.authorization) {
+    return res.status(401).send("Unauthorized request");
+  }
+  let token = req.headers.authorization.split(" ")[1];
+  if (token === "null") {
+    return res.status(401).send("Unauthorized request");
+  }
+  let payload = jwt.verify(token, "secretKey");
+  if (!payload) {
+    return res.status(401).send("Unauthorized request");
+  }
+  req.userId = payload.subject;
+  next();
+}
+
 router.get("/", (req, res) => {
   res.send("Response from API Route!");
 });
@@ -97,7 +114,7 @@ router.get("/events", (req, res) => {
   res.json(events);
 });
 
-router.get("/special", (req, res) => {
+router.get("/special", verifyToken, (req, res) => {
   let events = [
     {
       _id: "1",

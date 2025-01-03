@@ -15,11 +15,11 @@ const routes: Routes = [
   {
     path: 'events',
     component: EventsComponent,
-    canActivate: [authGuard],
   },
   {
     path: 'special',
     component: SpecialEventsComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'login',

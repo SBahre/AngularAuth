@@ -10,7 +10,10 @@ import { SpecialEventsComponent } from './special-events/special-events.componen
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './services/auth.service';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptors,
+} from '@angular/common/http';
 import { EventService } from './event.service';
 import { tokenInterceptor } from './token.interceptor';
 

@@ -13,7 +13,6 @@ export const tokenInterceptor: HttpInterceptorFn = (
   next: HttpHandlerFn
 ): Observable<HttpEvent<any>> => {
   let authService = inject(AuthService);
-  console.log(authService.getToken());
 
   let tokenizedReq = req.clone({
     setHeaders: {
